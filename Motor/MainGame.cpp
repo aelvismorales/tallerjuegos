@@ -18,7 +18,7 @@ MainGame::~MainGame()
 void MainGame::run()
 {
 	init();
-	//TO DO SPRITE 
+	sprite.init(-1, -1, 1, 1);
 	update();
 }
 
@@ -33,7 +33,7 @@ void MainGame::processInput()
 			gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEMOTION:
-			cout << event.motion.x << event.motion.y << "\n";
+			cout << event.motion.x << ", "<<event.motion.y << "\n";
 			break;
 		}
 	}
@@ -51,14 +51,20 @@ void MainGame::init()
 	{
 		//TODO mostrar error de glew
 	}
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); //Generando 2 ventanas que se dibujando simultaneamente
 	glClearColor(0.0f, 0.0, 1.0f, 1.0f);
+	initShaders();
+}
+void MainGame::initShaders()
+{
+	
+	glProgram.compileShader("Shaders/colorShaderVert.txt","Shaders/colorShaderFrag.txt");
 }
 void MainGame::draw()
 {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//TODO UPDATE SPRITE 
+	sprite.draw();
 	SDL_GL_SwapWindow(window);
 }
 

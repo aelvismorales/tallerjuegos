@@ -7,6 +7,7 @@ private:
 	int width;
 	int height;
 	//todo vbo vertex Buffer Object 
+	GLuint vboID;
 public:
 	Sprite();
 	~Sprite();
